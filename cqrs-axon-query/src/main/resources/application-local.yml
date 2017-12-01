@@ -1,0 +1,15 @@
+
+server:
+  port: 9093
+
+logging:
+  level:
+    org.axonframework: debug
+    cn.vpclub.moses: debug
+
+spring:
+  rabbitmq:
+    host: rabbit-local.vpclub.io
+  jpa:
+    hibernate.ddl-auto: update
+

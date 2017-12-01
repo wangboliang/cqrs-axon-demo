@@ -1,0 +1,19 @@
+axon:
+  distributed:
+    jgroups:
+      configuration-file: jgroups/udp.xml
+
+server:
+  port: 9092
+
+logging:
+  level:
+    org.axonframework: debug
+    cn.vpclub.moses: debug
+
+spring:
+  rabbitmq:
+    host: rabbit-local.vpclub.io
+  jpa:
+    hibernate.ddl-auto: update
+
