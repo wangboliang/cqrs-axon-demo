@@ -1,20 +1,18 @@
-app:
-  name: order
-  role: query
-  descriptions: 订单查询服务
-  cluster-name: cqrs-axon-demo
-  datasource:
-    username: root
-    password: ckVxkqVs5Gr4lSLtJTsa301UJ9TwjHR/empatRoKLhyav2f6YSsti7OmVQfaO7xreYXoIbYPmHo6p11UbY/XJg==
-    druid:
-      public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAN9dGI7ljLxGCLgm0jzfgaYrzYaIAyhpz3v1KffP5Pvv0nKhJzjD8vbRghFWakv6xHZHPPwjgZtFVb10HiblEHECAwEAAQ==
+server:
+  context-path: "/order-query"
+  port: 8080
 
 spring:
-  profiles:
-    include:
-    - web
-    - swagger
-    - locale
-    - jpa
-    - druid
-    - axon-amqp
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/axon
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect

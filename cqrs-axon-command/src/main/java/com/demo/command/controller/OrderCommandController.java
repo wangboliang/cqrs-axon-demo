@@ -1,9 +1,9 @@
-package com.demo.command.controllers;
+package com.demo.command.controller;
 
-import com.demo.api.commands.CreateOrderCommand;
+import com.demo.api.command.CreateOrderCommand;
 import com.demo.api.dto.BaseResponse;
 import com.demo.api.utils.IdWorker;
-import com.demo.command.requests.CreateOrderRequest;
+import com.demo.command.request.CreateOrderRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/order")
 @Slf4j
-public class OrderController {
+public class OrderCommandController {
 
     /**
      * Axon提供的命令网关，用于发送command命令
      */
     private CommandGateway commandGateway;
 
-    public OrderController(CommandGateway commandGateway) {
+    public OrderCommandController(CommandGateway commandGateway) {
         this.commandGateway = commandGateway;
     }
 

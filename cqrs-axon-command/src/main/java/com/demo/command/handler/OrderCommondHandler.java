@@ -1,7 +1,7 @@
-package com.demo.command.handlers;
+package com.demo.command.handler;
 
-import com.demo.api.commands.CreateOrderCommand;
-import com.demo.command.aggregates.OrderAggregate;
+import com.demo.api.command.CreateOrderCommand;
+import com.demo.command.aggregate.OrderAggregate;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;

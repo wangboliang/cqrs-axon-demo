@@ -1,6 +1,6 @@
-package com.demo.command.requests;
+package com.demo.command.request;
 
-import com.demo.api.dto.OrderProduct;
+import com.demo.api.model.OrderProduct;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

@@ -3,106 +3,26 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.demo</groupId>
 	<artifactId>cqrs-axon-command</artifactId>
-	<version>1.0.SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>cqrs-axon-command</name>
-	<description>Demo project for Spring Boot</description>
+	<name>cqrs-axon-demo</name>
+	<description>CQRS Axon Demo Project For Spring Boot</description>
 	<url>https://github.com/wangboliang</url>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.4.RELEASE</version>
+		<groupId>com.demo</groupId>
+		<artifactId>cqrs-axon-demo</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		<axon.version>3.1-SNAPSHOT</axon.version>
-		<jackson-datatype.version>2.9.0</jackson-datatype.version>
-		<jgroups-kubernetes.version>1.0.4.RELEASE</jgroups-kubernetes.version>
-		<quartz.version>2.2.1</quartz.version>
-		<jsr310.version>2.6.5</jsr310.version>
-		<!--quartz-->
-		<quartz.version>2.2.1</quartz.version>
-		<!-- lomBok -->
-		<lombok.version>1.16.8</lombok.version>
-	</properties>
-
 	<dependencies>
-		<!-- api -->
+		<!-- cqrs axon api -->
 		<dependency>
-			<groupId>com.demo</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>cqrs-axon-api</artifactId>
-			<version>1.0.SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
-
-		<!-- spring boot -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-amqp</artifactId>
-		</dependency>
-
-		<!-- jpa -->
-		<dependency>
-			<groupId>cn.vpclub</groupId>
-			<artifactId>spring-boot-starter-jpa</artifactId>
-		</dependency>
-		<!-- druid -->
-		<dependency>
-			<groupId>cn.vpclub</groupId>
-			<artifactId>spring-boot-starter-druid</artifactId>
-		</dependency>
-
-		<!--axon framework-->
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-core</artifactId>
-			<version>${axon.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-spring</artifactId>
-			<version>${axon.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-spring-boot-autoconfigure</artifactId>
-			<version>${axon.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-amqp</artifactId>
-			<version>${axon.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-spring-boot-starter</artifactId>
-			<version>${axon.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-mongo</artifactId>
-			<version>${axon.version}</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>

@@ -1,6 +1,6 @@
-package com.demo.api.commands;
+package com.demo.api.command;
 
-import com.demo.api.dto.OrderProduct;
+import com.demo.api.model.OrderProduct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

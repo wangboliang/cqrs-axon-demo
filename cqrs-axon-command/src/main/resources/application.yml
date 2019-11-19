@@ -26,7 +26,7 @@ spring:
 
 axon:
   eventstore:
-    aggregate-class: com.example.simpleordercommand.aggregates.OrderAggregate
+    aggregate-class: com.example.simpleordercommand.aggregate.OrderAggregate
   saga:
     saga-class: com.example.simpleordercommand.saga.OrderSaga
 

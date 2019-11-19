@@ -3,54 +3,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.demo</groupId>
 	<artifactId>cqrs-axon-api</artifactId>
-	<version>1.0.SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>cqrs-axon-api</name>
-	<description>Demo project for Spring Boot</description>
+	<description>CQRS Axon Demo Project For Spring Boot</description>
 	<url>https://github.com/wangboliang</url>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.4.RELEASE</version>
+		<groupId>com.demo</groupId>
+		<artifactId>cqrs-axon-demo</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		<axon.version>3.1-SNAPSHOT</axon.version>
-		<lombok.version>1.16.8</lombok.version>
-	</properties>
-
-	<dependencies>
-		<!-- spring boot-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<!--axon framework-->
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-core</artifactId>
-			<version>${axon.version}</version>
-		</dependency>
-
-		<!-- lomBok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
-		</dependency>
-	</dependencies>
-
 </project>

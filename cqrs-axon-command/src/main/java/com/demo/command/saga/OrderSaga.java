@@ -1,6 +1,6 @@
 package com.demo.command.saga;
 
-import com.demo.api.events.OrderCreatedEvent;
+import com.demo.api.event.OrderCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.saga.EndSaga;

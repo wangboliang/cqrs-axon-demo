@@ -1,5 +1,6 @@
 package com.demo.api.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,11 +14,12 @@ import java.io.Serializable;
  * @since 2017/12/1
  */
 @Data
-public class BaseResponse<T> implements Serializable{
+@Builder
+public class BaseResponse<T>{
     /**
      * 返回编码
      */
-    private Integer returnCode;
+    private Integer code;
     /**
      * 返回描述
      */

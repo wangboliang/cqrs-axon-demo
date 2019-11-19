@@ -1,7 +1,7 @@
-package com.demo.command.aggregates;
+package com.demo.command.aggregate;
 
-import com.demo.api.dto.OrderProduct;
-import com.demo.api.events.OrderCreatedEvent;
+import com.demo.api.model.OrderProduct;
+import com.demo.api.event.OrderCreatedEvent;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
