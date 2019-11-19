@@ -6,6 +6,7 @@ import com.demo.api.utils.IdWorker;
 import com.demo.command.request.CreateOrderRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2017/12/1
  */
 @RestController
-@RequestMapping("/order")
 @Slf4j
+@RequestMapping("/order")
 public class OrderCommandController {
 
     /**
@@ -29,32 +30,27 @@ public class OrderCommandController {
      */
     private CommandGateway commandGateway;
 
+    @Autowired
     public OrderCommandController(CommandGateway commandGateway) {
         this.commandGateway = commandGateway;
     }
 
     @PostMapping(value = "/create")
     public BaseResponse create(@RequestBody CreateOrderRequest request) {
-        BaseResponse response = new BaseResponse();
+        BaseResponse response;
         try {
             Long orderId = IdWorker.getId();
             CreateOrderCommand command = new CreateOrderCommand(orderId,
                     request.getAppId(),
                     request.getUsername(),
                     request.getOrderProducts());
-
+            //发送指令
             commandGateway.send(command);
-
-            response.setReturnCode(1000);
-            response.setMessage("成功");
-            response.setDataInfo(orderId);
+            response = BaseResponse.builder().code(1000).message("创建成功").dataInfo(orderId).build();
         } catch (Exception e) {
-            log.error("创建订单发生异常:{}", e);
-            response.setReturnCode(1004);
-            response.setMessage("服务器异常");
+            log.error("创建订单异常:{}", e);
+            response = BaseResponse.builder().code(1001).message("服务异常").dataInfo(null).build();
         }
-
         return response;
     }
-
 }

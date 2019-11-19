@@ -1,33 +1,3 @@
-app:
-  name: order
-  role: command
-  descriptions: 订单命令服务
-  cluster-name: cqrs-axon-demo
-  datasource:
-    username: root
-    password: ckVxkqVs5Gr4lSLtJTsa301UJ9TwjHR/empatRoKLhyav2f6YSsti7OmVQfaO7xreYXoIbYPmHo6p11UbY/XJg==
-    druid:
-      public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAN9dGI7ljLxGCLgm0jzfgaYrzYaIAyhpz3v1KffP5Pvv0nKhJzjD8vbRghFWakv6xHZHPPwjgZtFVb10HiblEHECAwEAAQ==
-
-spring:
-  profiles:
-    include:
-    - web
-    - swagger
-    - locale
-    - logging
-    - jpa
-    - druid
-    - axon-jgroups
-    - axon-amqp
-    - axon-eventstore
-    - axon-scheduler
-    - axon-saga
-
-axon:
-  eventstore:
-    aggregate-class: com.example.simpleordercommand.aggregate.OrderAggregate
-  saga:
-    saga-class: com.example.simpleordercommand.saga.OrderSaga
-
-
+server:
+  context-path: "/order-command"
+  port: 8090

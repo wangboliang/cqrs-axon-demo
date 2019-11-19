@@ -17,8 +17,7 @@ import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
 /**
  * <p>
- * 聚合根AggregateRoot
- * 理论上一个服务一般只会有一个AggregateRoot
+ * 聚合根
  * </p>
  *
  * @author wangliang

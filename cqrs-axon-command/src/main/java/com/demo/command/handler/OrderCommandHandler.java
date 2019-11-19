@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.Repository;
+import org.axonframework.eventhandling.EventBus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,14 +19,12 @@ import org.springframework.stereotype.Component;
  * @author wangliang
  * @since 2017/12/01
  */
-@Component
 @Slf4j
 @AllArgsConstructor
-public class OrderCommondHandler {
+public class OrderCommandHandler {
 
     private Repository<OrderAggregate> repository;
-
-//  private QuartzEventScheduler quartzEventScheduler;
+    private EventBus eventBus;
 
     @CommandHandler
     public void handle(CreateOrderCommand command) throws Exception {

@@ -9,6 +9,9 @@ AxonFramework是一个基于事件驱动的轻量级CQRS框架，既支持直接
 
 ![CQRS](https://raw.githubusercontent.com/wangboliang/cqrs-axon-demo/master/images/axon.png)
 
-[axon官网](https://docs.axoniq.io/)
-
-[来源](http://edisonxu.com/tags/CQRS/)
+### 参考
+- [Axon官网](https://docs.axoniq.io/)
+- https://axoniq.io/blog-overview/bounded-contexts-with-axon
+- http://edisonxu.com/tags/CQRS/
+- https://github.com/AxonFramework/AxonBank
+- https://github.com/EdisonXu/sbs-axon
