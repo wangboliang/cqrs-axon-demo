@@ -23,11 +23,11 @@ import java.util.Map;
  * @author wangliang
  * @since 2019/11/19
  */
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class OrderEntry {
 
     @Id

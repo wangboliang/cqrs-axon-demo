@@ -1,9 +1,8 @@
 package com.demo.command.aggregate;
 
-import com.demo.api.model.OrderProduct;
+import com.demo.api.command.CreateOrderCommand;
 import com.demo.api.event.OrderCreatedEvent;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.demo.api.model.OrderProduct;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.commandhandling.model.AggregateMember;
@@ -11,6 +10,7 @@ import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventhandling.scheduling.ScheduleToken;
 import org.axonframework.spring.stereotype.Aggregate;
 
+import javax.persistence.Entity;
 import java.util.List;
 
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
@@ -23,8 +23,6 @@ import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
  * @author wangliang
  * @since 2017/11/15
  */
-@NoArgsConstructor
-@ToString
 @Slf4j
 @Aggregate
 public class OrderAggregate {
@@ -71,12 +69,15 @@ public class OrderAggregate {
 
     private ScheduleToken closeScheduleToken;
 
-    public OrderAggregate(Long id, String username, List<OrderProduct> orderLine, Long appId,
-                          String postIp, String mainOrderNo) {
-        apply(new OrderCreatedEvent(id, orderLine, username, appId, postIp, mainOrderNo));
+    public OrderAggregate() {
     }
 
+    public OrderAggregate(CreateOrderCommand command) {
+        //step4.发起创建订单事件
+        apply(new OrderCreatedEvent(command.getOrderId(), command.getUsername(), command.getOrderProducts()));
+    }
 
+    //step5.设置聚合根属性
     @EventHandler
     public void on(OrderCreatedEvent event) {
         this.appId = event.getAppId();
@@ -86,5 +87,4 @@ public class OrderAggregate {
         this.postIp = event.getPostIp();
         this.mainOrderNo = event.getMainOrderNo();
     }
-
 }

@@ -18,11 +18,11 @@ import javax.persistence.Id;
  * @author wangliang
  * @since 2019/11/19
  */
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class OrderProductEntry {
     @Id
     @GeneratedValue

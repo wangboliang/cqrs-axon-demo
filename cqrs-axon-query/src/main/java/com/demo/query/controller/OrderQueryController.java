@@ -29,7 +29,6 @@ public class OrderQueryController {
 
     private OrderRepository repository;
 
-    @Autowired
     public OrderQueryController(OrderRepository repository) {
         this.repository = repository;
     }

@@ -11,8 +11,6 @@ import java.util.List;
 @Accessors(chain = true)
 public class CreateOrderRequest{
 
-  private Long appId;
-
   private String username;
 
   private List<OrderProduct> orderProducts;

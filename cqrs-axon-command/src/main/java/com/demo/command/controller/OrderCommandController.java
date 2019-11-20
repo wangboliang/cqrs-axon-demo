@@ -6,7 +6,6 @@ import com.demo.api.utils.IdWorker;
 import com.demo.command.request.CreateOrderRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +29,6 @@ public class OrderCommandController {
      */
     private CommandGateway commandGateway;
 
-    @Autowired
     public OrderCommandController(CommandGateway commandGateway) {
         this.commandGateway = commandGateway;
     }
@@ -40,11 +38,8 @@ public class OrderCommandController {
         BaseResponse response;
         try {
             Long orderId = IdWorker.getId();
-            CreateOrderCommand command = new CreateOrderCommand(orderId,
-                    request.getAppId(),
-                    request.getUsername(),
-                    request.getOrderProducts());
-            //发送指令
+            CreateOrderCommand command = new CreateOrderCommand(orderId, request.getUsername(), request.getOrderProducts());
+            //step1.发送创建订单指令
             commandGateway.send(command);
             response = BaseResponse.builder().code(1000).message("创建成功").dataInfo(orderId).build();
         } catch (Exception e) {

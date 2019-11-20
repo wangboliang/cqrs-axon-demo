@@ -16,11 +16,9 @@ public class OrderCreatedEvent {
     @TargetAggregateIdentifier
     private Long orderId;
 
-    private List<OrderProduct> products;
-    /**
-     * 用户id
-     */
     private String username;
+
+    private List<OrderProduct> products;
 
     private Long appId;
 
@@ -31,6 +29,13 @@ public class OrderCreatedEvent {
     private Integer mainStatus;
 
     private String mainOrderNo;
+
+    public OrderCreatedEvent(Long orderId, String username,
+                             List<OrderProduct> products) {
+        this.orderId = orderId;
+        this.username = username;
+        this.products = products;
+    }
 
     public OrderCreatedEvent(Long orderId,
                              List<OrderProduct> products, String username, Long appId, String postIp,

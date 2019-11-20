@@ -1,39 +1,52 @@
 package com.demo.command.config;
 
 import com.demo.command.aggregate.OrderAggregate;
-import com.demo.command.handler.OrderCommandHandler;
-import com.demo.command.saga.OrderSaga;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.config.SagaConfiguration;
-import org.axonframework.eventhandling.EventBus;
-import org.axonframework.spring.config.AxonConfiguration;
+import org.axonframework.commandhandling.model.Repository;
+import org.axonframework.eventsourcing.AggregateFactory;
+import org.axonframework.eventsourcing.EventSourcingRepository;
+import org.axonframework.eventsourcing.eventstore.EventStore;
+import org.axonframework.spring.eventsourcing.SpringPrototypeAggregateFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 /**
  * <p>
  * Axon配置类
+ * 这里不要用构造器注入，否则会造成循环依赖
  * </p>
  *
  * @author wangliang
  * @since 2017/12/01
  */
 @Slf4j
-@AllArgsConstructor
 @Configuration
 public class AxonConfig {
 
-    private AxonConfiguration axonConfiguration;
-    private EventBus eventBus;
+    @Autowired
+    private EventStore eventStore;
 
     @Bean
-    public OrderCommandHandler orderCommandHandler() {
-        return new OrderCommandHandler(axonConfiguration.repository(OrderAggregate.class), eventBus);
+    @Scope("prototype")
+    public OrderAggregate orderAggregate() {
+        return new OrderAggregate();
     }
 
     @Bean
-    public SagaConfiguration orderTransferManagementSagaConfiguration() {
-        return SagaConfiguration.trackingSagaManager(OrderSaga.class);
+    public AggregateFactory<OrderAggregate> orderAggregateAggregateFactory() {
+        SpringPrototypeAggregateFactory<OrderAggregate> aggregateFactory = new SpringPrototypeAggregateFactory<>();
+        aggregateFactory.setPrototypeBeanName("orderAggregate");
+        return aggregateFactory;
+    }
+
+    @Bean
+    public Repository<OrderAggregate> orderAggregateRepository() {
+        EventSourcingRepository<OrderAggregate> repository = new EventSourcingRepository<OrderAggregate>(
+                orderAggregateAggregateFactory(),
+                eventStore
+        );
+        return repository;
     }
 }

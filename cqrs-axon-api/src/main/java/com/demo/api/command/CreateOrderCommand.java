@@ -16,7 +16,6 @@ public class CreateOrderCommand implements Serializable {
 
   @TargetAggregateIdentifier
   private Long orderId;
-  private Long appId;
   private String username;
   private List<OrderProduct> orderProducts;
 }
