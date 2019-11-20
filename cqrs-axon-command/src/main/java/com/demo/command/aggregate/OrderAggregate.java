@@ -1,9 +1,11 @@
 package com.demo.command.aggregate;
 
 import com.demo.api.command.CreateOrderCommand;
+import com.demo.api.event.OrderConfirmedEvent;
 import com.demo.api.event.OrderCreatedEvent;
 import com.demo.api.model.OrderProduct;
 import lombok.extern.slf4j.Slf4j;
+import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.commandhandling.model.AggregateMember;
 import org.axonframework.eventhandling.EventHandler;
@@ -74,17 +76,25 @@ public class OrderAggregate {
 
     public OrderAggregate(CreateOrderCommand command) {
         //step4.发起创建订单事件
+        log.info("step4.发起创建订单事件");
         apply(new OrderCreatedEvent(command.getOrderId(), command.getUsername(), command.getOrderProducts()));
     }
 
-    //step5.设置聚合根属性
+    //step5.同步监听创建订单事件，更新Aggregate状态
     @EventHandler
     public void on(OrderCreatedEvent event) {
+        log.info("step5.同步监听创建订单事件，更新Aggregate状态");
         this.appId = event.getAppId();
         this.orderId = event.getOrderId();
         this.username = event.getUsername();
         this.orderLine = event.getProducts();
         this.postIp = event.getPostIp();
         this.mainOrderNo = event.getMainOrderNo();
+    }
+
+    //step9.发起提交订单事件
+    public void confirm(){
+        log.info("step9.发起提交订单事件");
+        apply(new OrderConfirmedEvent(orderId));
     }
 }

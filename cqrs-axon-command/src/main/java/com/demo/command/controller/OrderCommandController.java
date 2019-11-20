@@ -25,7 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderCommandController {
 
     /**
-     * Axon提供的命令网关，用于发送command命令
+     * Axon提供的命令网关，用于发送command命令。
+     * 每一个Command只会发送到一个CommandHandler去，
+     * 当有多个CommandHandler去订阅一个CommandMessage时，
+     * 最后一个覆盖前面所有。
      */
     private CommandGateway commandGateway;
 
@@ -40,6 +43,7 @@ public class OrderCommandController {
             Long orderId = IdWorker.getId();
             CreateOrderCommand command = new CreateOrderCommand(orderId, request.getUsername(), request.getOrderProducts());
             //step1.发送创建订单指令
+            log.info("step1.发送创建订单指令");
             commandGateway.send(command);
             response = BaseResponse.builder().code(1000).message("创建成功").dataInfo(orderId).build();
         } catch (Exception e) {

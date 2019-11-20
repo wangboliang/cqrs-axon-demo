@@ -16,7 +16,17 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: axon
+    password: axon
 
 axon:
+  distributed:
+    jgroups:
+      enabled: true
+      gossip:
+        autoStart: true
   amqp:
-    exchange: order-query
+    exchange: Axon.EventBus

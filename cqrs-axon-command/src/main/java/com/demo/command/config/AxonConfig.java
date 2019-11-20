@@ -1,8 +1,9 @@
 package com.demo.command.config;
 
 import com.demo.command.aggregate.OrderAggregate;
-import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.model.Repository;
+import org.axonframework.eventhandling.saga.repository.SagaStore;
+import org.axonframework.eventhandling.saga.repository.jpa.JpaSagaStore;
 import org.axonframework.eventsourcing.AggregateFactory;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventsourcing.eventstore.EventStore;
@@ -21,7 +22,6 @@ import org.springframework.context.annotation.Scope;
  * @author wangliang
  * @since 2017/12/01
  */
-@Slf4j
 @Configuration
 public class AxonConfig {
 

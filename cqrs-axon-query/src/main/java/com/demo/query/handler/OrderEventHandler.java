@@ -17,10 +17,10 @@ public class OrderEventHandler {
     @Autowired
     private OrderRepository repository;
 
-    //step6.处理创建订单事件
+    //step6.异步监听创建订单事件
     @EventHandler
     public void on(OrderCreatedEvent event) {
-        log.info("处理创建订单事件: {}", event);
+        log.info("step5-1.异步监听创建订单事件，更新mysql数据");
         OrderEntry orderEntry = new OrderEntry();
         BeanUtils.copyProperties(event,orderEntry);
         repository.save(orderEntry);
