@@ -1,52 +1,56 @@
 package com.demo.command.config;
 
-import com.demo.command.aggregate.OrderAggregate;
-import org.axonframework.commandhandling.model.Repository;
-import org.axonframework.eventhandling.saga.repository.SagaStore;
-import org.axonframework.eventhandling.saga.repository.jpa.JpaSagaStore;
-import org.axonframework.eventsourcing.AggregateFactory;
-import org.axonframework.eventsourcing.EventSourcingRepository;
-import org.axonframework.eventsourcing.eventstore.EventStore;
-import org.axonframework.spring.eventsourcing.SpringPrototypeAggregateFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-
 /**
  * <p>
- * Axon配置类
- * 这里不要用构造器注入，否则会造成循环依赖
+ *
  * </p>
  *
  * @author wangliang
- * @since 2017/12/01
+ * @since 2019/11/21
  */
-@Configuration
+//@Configuration
 public class AxonConfig {
 
-    @Autowired
-    private EventStore eventStore;
+//    @Value("${mongodb.url}")
+//    private String mongoUrl;
+//
+//    @Value("${mongodb.dbname}")
+//    private String mongoDbName;
+//
+//    @Value("${mongodb.events.collection.name}")
+//    private String eventsCollectionName;
+//
+//    @Value("${mongodb.events.snapshot.collection.name}")
+//    private String snapshotCollectionName;
+//
+//    /*@Bean
+//    public Serializer axonJsonSerializer() {
+//        return new JacksonSerializer();
+//    }*/
+//
+//    @Bean
+//    public EventStorageEngine eventStorageEngine(Serializer serializer) {
+//        return new MongoEventStorageEngine(
+//                serializer, null, axonMongoTemplate(), new DocumentPerEventStorageStrategy());
+//    }
+//
+//    @Bean(name = "axonMongoTemplate")
+//    public MongoTemplate axonMongoTemplate() {
+//        MongoTemplate template = new DefaultMongoTemplate(mongoClient(), mongoDbName, eventsCollectionName, snapshotCollectionName);
+//        return template;
+//    }
+//
+//    @Bean
+//    public MongoClient mongoClient() {
+//        MongoFactory mongoFactory = new MongoFactory();
+//        mongoFactory.setMongoAddresses(Arrays.asList(new ServerAddress(mongoUrl)));
+//        return mongoFactory.createMongo();
+//    }
 
-    @Bean
-    @Scope("prototype")
-    public OrderAggregate orderAggregate() {
-        return new OrderAggregate();
-    }
-
-    @Bean
-    public AggregateFactory<OrderAggregate> orderAggregateAggregateFactory() {
-        SpringPrototypeAggregateFactory<OrderAggregate> aggregateFactory = new SpringPrototypeAggregateFactory<>();
-        aggregateFactory.setPrototypeBeanName("orderAggregate");
-        return aggregateFactory;
-    }
-
-    @Bean
-    public Repository<OrderAggregate> orderAggregateRepository() {
-        EventSourcingRepository<OrderAggregate> repository = new EventSourcingRepository<OrderAggregate>(
-                orderAggregateAggregateFactory(),
-                eventStore
-        );
-        return repository;
-    }
+    /*@Bean
+    public SagaStore sagaStore(){
+        org.axonframework.mongo.eventhandling.saga.repository.MongoTemplate mongoTemplate =
+                new org.axonframework.mongo.eventhandling.saga.repository.DefaultMongoTemplate(mongoClient());
+        return new MongoSagaStore(mongoTemplate, axonJsonSerializer());
+    }*/
 }

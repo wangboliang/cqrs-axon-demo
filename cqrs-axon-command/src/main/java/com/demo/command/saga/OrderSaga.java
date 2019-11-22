@@ -1,8 +1,8 @@
 package com.demo.command.saga;
 
-import com.demo.api.command.ConfirmOrderCommand;
-import com.demo.api.event.OrderConfirmedEvent;
-import com.demo.api.event.OrderCreatedEvent;
+import com.demo.api.command.order.ConfirmOrderCommand;
+import com.demo.api.event.order.OrderConfirmedEvent;
+import com.demo.api.event.order.OrderCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.saga.EndSaga;

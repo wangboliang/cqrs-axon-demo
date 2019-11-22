@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntry, String> {
+//public interface OrderRepository extends MongoRepository<OrderEntry, String> {
 
     OrderEntry findById(String id);
 

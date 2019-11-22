@@ -1,9 +1,7 @@
 package com.demo.query.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,9 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
-import java.util.Map;
+import java.util.List;
 
 /**
  * <p>
@@ -23,21 +20,18 @@ import java.util.Map;
  * @author wangliang
  * @since 2019/11/19
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
+//@Document
 @Entity
 public class OrderEntry {
-
     @Id
-    private String id;
+    private Long id;
     @Column
     private String username;
     @Column
     private double payment;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    @MapKey(name = "id")
-    private Map<String, OrderProductEntry> products;
+    private List<OrderProductEntry> products;
 }

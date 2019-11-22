@@ -2,11 +2,25 @@ server:
   context-path: "/order-query"
   port: 8080
 
+#mongodb:
+#  url:  127.0.0.1
+#  port: 27017
+##  username:
+##  password:
+#  dbname: axon
+#  events:
+#    collection:
+#      name: events
+#    snapshot:
+#      collection:
+#        name: snapshots
+
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/axon
     username: root
     password: root
+    sql-script-encoding: UTF-8
   jpa:
     database: mysql
     show-sql: true
@@ -23,10 +37,9 @@ spring:
     password: axon
 
 axon:
-  distributed:
-    jgroups:
-      enabled: true
-      gossip:
-        autoStart: true
   amqp:
     exchange: Axon.EventBus
+  eventhandling:
+    processors:
+      order:
+        source: orderQueueMessageSource

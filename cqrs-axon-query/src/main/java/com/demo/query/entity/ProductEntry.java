@@ -1,9 +1,7 @@
 package com.demo.query.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,15 +15,13 @@ import javax.persistence.Id;
  * @author wangliang
  * @since 2019/11/19
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
+//@Document
 @Entity
 public class ProductEntry {
-
     @Id
-    private String id;
+    private Long id;
     @Column
     private String name;
     @Column

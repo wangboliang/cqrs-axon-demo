@@ -1,9 +1,8 @@
 package com.demo.query.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,20 +17,26 @@ import javax.persistence.Id;
  * @author wangliang
  * @since 2019/11/19
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class OrderProductEntry {
     @Id
     @GeneratedValue
     private Long jpaId;
-    private String id;
+    @Column
+    private Long productId;
     @Column
     private String name;
     @Column
     private long price;
     @Column
     private int amount;
+
+    public OrderProductEntry(Long productId, String name, long price, int amount) {
+        this.productId = productId;
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+    }
 }

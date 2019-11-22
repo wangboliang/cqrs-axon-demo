@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntry, String> {
+//public interface ProductRepository extends MongoRepository<ProductEntry, String> {
 
     ProductEntry findById(String id);
 }

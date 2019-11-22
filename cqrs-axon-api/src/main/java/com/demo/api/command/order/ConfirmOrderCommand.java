@@ -1,8 +1,9 @@
-package com.demo.api.command;
+package com.demo.api.command.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
 /**
  * <p>
@@ -16,5 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConfirmOrderCommand {
+
+    @TargetAggregateIdentifier
     private Long id;
 }

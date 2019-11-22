@@ -1,11 +1,12 @@
 package com.demo.command.controller;
 
-import com.demo.api.command.CreateOrderCommand;
+import com.demo.api.command.order.CreateOrderCommand;
 import com.demo.api.dto.BaseResponse;
 import com.demo.api.utils.IdWorker;
 import com.demo.command.request.CreateOrderRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,11 +31,8 @@ public class OrderCommandController {
      * 当有多个CommandHandler去订阅一个CommandMessage时，
      * 最后一个覆盖前面所有。
      */
+    @Autowired
     private CommandGateway commandGateway;
-
-    public OrderCommandController(CommandGateway commandGateway) {
-        this.commandGateway = commandGateway;
-    }
 
     @PostMapping(value = "/create")
     public BaseResponse create(@RequestBody CreateOrderRequest request) {

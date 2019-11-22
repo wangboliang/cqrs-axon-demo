@@ -1,18 +1,15 @@
 package com.demo.command.aggregate;
 
-import com.demo.api.command.CreateOrderCommand;
-import com.demo.api.event.OrderConfirmedEvent;
-import com.demo.api.event.OrderCreatedEvent;
+import com.demo.api.event.order.OrderConfirmedEvent;
+import com.demo.api.event.order.OrderCreatedEvent;
 import com.demo.api.model.OrderProduct;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.commandhandling.model.AggregateMember;
 import org.axonframework.eventhandling.EventHandler;
-import org.axonframework.eventhandling.scheduling.ScheduleToken;
 import org.axonframework.spring.stereotype.Aggregate;
 
-import javax.persistence.Entity;
 import java.util.List;
 
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
@@ -26,75 +23,46 @@ import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
  * @since 2017/11/15
  */
 @Slf4j
+@Getter
 @Aggregate
 public class OrderAggregate {
 
     @AggregateIdentifier
-    private Long orderId;
-
-    /**
-     * 主订单编号
-     */
-    private String mainOrderNo;
-
-    /**
-     * 主订单状态
-     */
-    private Integer mainStatus;
-
-    /**
-     * 支付流水号
-     */
-    private String serialCode;
-
-    /**
-     * 支付时间
-     */
-    private Long payTime;
-    /**
-     * 用户信息
-     */
+    private Long id;
     private String username;
-    /**
-     * 待付款金额
-     */
-    private Long paymentAmount;
+    private double payment;
 
     @AggregateMember
-    private List<OrderProduct> orderLine;
-
-    private Long appId;
-
-    private String postIp;
-
-    private Long postTime;
-
-    private ScheduleToken closeScheduleToken;
+    private List<OrderProduct> products;
 
     public OrderAggregate() {
     }
 
-    public OrderAggregate(CreateOrderCommand command) {
+    public OrderAggregate(Long orderId, String username, List<OrderProduct> products) {
         //step4.发起创建订单事件
         log.info("step4.发起创建订单事件");
-        apply(new OrderCreatedEvent(command.getOrderId(), command.getUsername(), command.getOrderProducts()));
+        apply(new OrderCreatedEvent(orderId, username, products));
     }
 
     //step5.同步监听创建订单事件，更新Aggregate状态
     @EventHandler
     public void on(OrderCreatedEvent event) {
         log.info("step5.同步监听创建订单事件，更新Aggregate状态");
-        this.appId = event.getAppId();
-        this.orderId = event.getOrderId();
+        this.id = event.getOrderId();
         this.username = event.getUsername();
-        this.orderLine = event.getProducts();
-        this.postIp = event.getPostIp();
-        this.mainOrderNo = event.getMainOrderNo();
+        this.products = event.getProducts();
+        computePrice();
+    }
+
+    private void computePrice() {
+        products.forEach((product) -> {
+            payment += product.getPrice() * product.getAmount();
+        });
     }
 
     //step9.发起提交订单事件
-    public void confirm(){
+    public void confirm() {
         log.info("step9.发起提交订单事件");
-        apply(new OrderConfirmedEvent(orderId));
+        apply(new OrderConfirmedEvent(id));
     }
 }

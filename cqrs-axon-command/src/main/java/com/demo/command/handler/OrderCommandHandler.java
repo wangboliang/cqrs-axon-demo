@@ -1,7 +1,7 @@
 package com.demo.command.handler;
 
-import com.demo.api.command.ConfirmOrderCommand;
-import com.demo.api.command.CreateOrderCommand;
+import com.demo.api.command.order.ConfirmOrderCommand;
+import com.demo.api.command.order.CreateOrderCommand;
 import com.demo.command.aggregate.OrderAggregate;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
@@ -35,16 +35,15 @@ public class OrderCommandHandler {
         log.info("step2.监听创建订单指令");
         log.info("step3.实例化订单聚合根");
         //step3.实例化订单聚合根
-        repository.newInstance(
-                () -> new OrderAggregate(command));
+        repository.newInstance(() -> new OrderAggregate(command.getOrderId(), command.getUsername(), command.getProducts()));
     }
 
     //step8.监听提交订单指令
     @CommandHandler
-    public void handle(ConfirmOrderCommand command){
+    public void handle(ConfirmOrderCommand command) {
         log.info("step8.监听提交订单指令");
         Aggregate<OrderAggregate> aggregate = repository.load(command.getId().toString());
-        aggregate.execute(aggregateRoot->aggregateRoot.confirm());
+        aggregate.execute(aggregateRoot -> aggregateRoot.confirm());
     }
 
 }
